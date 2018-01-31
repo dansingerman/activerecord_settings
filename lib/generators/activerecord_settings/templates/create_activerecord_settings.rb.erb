@@ -1,0 +1,13 @@
+class CreateActiverecordSettings < ActiveRecord::Migration<%= migration_version %>
+  def change
+    create_table :activerecord_settings do |t|
+      t.string :key, null: false
+      t.text :value, null: false
+      t.timestamp :expires
+
+      t.timestamps null: false
+    end
+
+    add_index :activerecord_settings, :key, unique: true
+  end
+end
