@@ -1,8 +1,6 @@
-# ActiverecordSettings
+# Activerecord Settings
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/activerecord_settings`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This gem creates a very simple activerecord based key value store. It can be useful if you want a place to store stuff that is more durable than a redis/memcache cache, or you simply don't want or need the complexity of running an additional cache.
 
 ## Installation
 
@@ -22,7 +20,34 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Create the migration to create the activerecord table with
+
+    bundle exec rails g activerecord_settings:install
+    
+Then you can set and get values like this
+
+    ActiverecordSettings::Setting.set('key', anything_yaml_can_serialize)
+    ActiverecordSettings::Setting.get('key')
+    => anything_yaml_can_serialize
+    
+You can also set keys to have expiries
+
+    ActiverecordSettings::Setting.set('key', 'It's morning', expires: 10.minutes.from_now)
+    ActiverecordSettings::Setting.get('key')
+    => 'It's morning'
+    # Some time passes, Thorin sings about gold
+    ActiverecordSettings::Setting.get('key')
+    => nil
+    
+ ```ActiverecordSettings::Setting``` is a bit of a mouthful, so you can create a shorthand for it by putting something like the following in an initiliazer
+ 
+    Setting = ActiverecordSettings::Setting
+    
+And then you can do this
+
+    Setting.set('key', anything_yaml_can_serialize)
+    Setting.get('key')
+    => anything_yaml_can_serialize
 
 ## Development
 
@@ -32,7 +57,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/activerecord_settings.
+Bug reports and pull requests are welcome on GitHub at https://github.com/dansingerman/activerecord_settings.
 
 ## License
 
