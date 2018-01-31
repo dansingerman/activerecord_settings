@@ -32,9 +32,9 @@ Then you can set and get values like this
     
 You can also set keys to have expiries
 
-    ActiverecordSettings::Setting.set('key', 'It's morning', expires: 10.minutes.from_now)
+    ActiverecordSettings::Setting.set('key', "It's morning", expires: 10.minutes.from_now)
     ActiverecordSettings::Setting.get('key')
-    => 'It's morning'
+    => "It's morning"
     # Some time passes, Thorin sings about gold
     ActiverecordSettings::Setting.get('key')
     => nil
