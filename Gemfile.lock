@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    activerecord_settings (0.0.3)
-      activerecord (>= 4.0, < 5.2)
+    activerecord_settings (0.0.4)
+      activerecord (>= 4.0)
 
 GEM
   remote: https://rubygems.org/
@@ -102,4 +102,4 @@ DEPENDENCIES
   timecop (~> 0.9)
 
 BUNDLED WITH
-   1.16.0
+   1.16.3
