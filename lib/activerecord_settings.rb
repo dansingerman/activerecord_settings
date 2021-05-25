@@ -29,7 +29,7 @@ module ActiverecordSettings
       existing = find_by_key(key)
 
       if existing
-        existing.update_attributes(setting)
+        existing.update(setting)
       else
         create({ key: key }.merge(setting))
       end
