@@ -23,7 +23,7 @@ module ActiverecordSettings
       if ActiveRecord.try(:use_yaml_unsafe_load) && YAML.respond_to?(:unsafe_load)
         YAML.unsafe_load(setting.value)
       elsif ActiveRecord.respond_to?(:yaml_column_permitted_classes)
-        YAML.safe_load(setting.value, permitted_classes: ActiveRecord.yaml_column_permitted_classes)
+        YAML.safe_load(setting.value, permitted_classes: ActiveRecord.yaml_column_permitted_classes, aliases: true)
       else
         YAML.load(setting.value)
       end
