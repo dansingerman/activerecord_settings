@@ -18,7 +18,15 @@ module ActiverecordSettings
         return nil
       end
 
-      YAML.load(setting.value)
+      # Newer versions of Rails 5.2.8.1+ have a setting to allow for permitted classes in YAML columns
+      # This is to prevent arbitrary code execution when loading YAML from the database.
+      if ActiveRecord.try(:use_yaml_unsafe_load) && YAML.respond_to?(:unsafe_load)
+        YAML.unsafe_load(setting.value)
+      elsif ActiveRecord.respond_to?(:yaml_column_permitted_classes)
+        YAML.safe_load(setting.value, permitted_classes: ActiveRecord.yaml_column_permitted_classes)
+      else
+        YAML.load(setting.value)
+      end
     end
 
     def self.set(key, value, expires: nil)

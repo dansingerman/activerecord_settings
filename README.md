@@ -23,6 +23,14 @@ Or install it yourself as:
 Create the migration to create the activerecord table with
 
     bundle exec rails g activerecord_settings:install
+
+As this library uses YAML to serialize/deserialize the values, in recent versions of Rails, you will need to add your list of permitted classes to your `config/application.rb` file:
+
+    config.active_record.yaml_column_permitted_classes = [
+      Symbol,
+      ActiveSupport::TimeWithZone,
+      ActiveSupport::TimeZone
+    ]
     
 Then you can set and get values like this
 

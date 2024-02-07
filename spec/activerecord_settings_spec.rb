@@ -40,7 +40,7 @@ RSpec.describe ActiverecordSettings do
     end
   end
 
-  describe 'When running ruby less than 3.1', if: Gem::Version.new(RUBY_VERSION) <= Gem::Version.new('3.1') do
+  describe 'When running ruby less than 3.1', if: Gem::Version.new(RUBY_VERSION) < Gem::Version.new('3.1') do
     let!(:datetime_object) { DateTime.now }
 
     context 'It allows unsafe yaml loading' do
